@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
       height: "5vh",
       borderRadius: "20px",
       backgroundColor: "#7986cb",
-      margin: '0 auto', 
+      margin: '15px auto', 
       marginBottom:"10px",
       display: "flex",
       "&:hover": {
@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     },
 
   input: {
-      margin:"5px 0 15px 0",
+      margin:"15px 0 0 0",
   },
   title: {
     color: "white",

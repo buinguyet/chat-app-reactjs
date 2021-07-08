@@ -15,7 +15,46 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import backgroundImage from "../../../assets/images/login1.jpg";
 import { useStyles } from "./styles";
 import { AccountCircle } from "@material-ui/icons";
-const Register = () => {
+import { reduxForm, Field, SubmissionError } from "redux-form";
+import { compose } from "redux";
+import validate from "./validate";
+
+const renderField = ({
+  input,
+  label,
+  type,
+  classes,
+  placeholder,
+  InputProps,
+  meta: { touched, error },
+}) => {
+  return (
+    <>
+      <TextField
+        {...input}
+        className={classes.input}
+        label={label}
+        variant="outlined"
+        placeholder={placeholder}
+        type={type}
+        fullWidth
+        required
+        InputProps={InputProps}
+      />
+      {touched && error && (
+        <span style={{ color: "#7986cb", fontSize: "11px" }}>
+          {error}
+        </span>
+      )}
+    </>
+  );
+};
+
+function Register(props) {
+  const { handleSubmit, onClickRegister } = props;
+  const handleSubmitFrom = (data) => {
+    if (onClickRegister) onClickRegister(data);
+  };
   const classes = useStyles();
   return (
     <Paper elevation={3} className={classes.paperStyle}>
@@ -31,75 +70,75 @@ const Register = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <h3>Sign up</h3>
-          <TextField
-            className={classes.input}
-            label="Email"
-            variant="outlined"
-            placeholder="Enter email"
-            fullWidth
-            required
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <EmailIcon className={classes.icon} />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            className={classes.input}
-            label="Username"
-            variant="outlined"
-            placeholder="Enter username"
-            fullWidth
-            required
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle className={classes.icon} />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            className={classes.input}
-            label="Password"
-            variant="outlined"
-            placeholder="Enter password"
-            type="password"
-            fullWidth
-            required
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <VpnKeyIcon className={classes.icon} />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            className={classes.input}
-            label="Confirm Password"
-            variant="outlined"
-            placeholder="Enter confirm password"
-            type="password"
-            fullWidth
-            required
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <VpnKeyIcon className={classes.icon} />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            className={classes.btnStyle}
-          >
-            <h4 className={classes.title}>Sign up</h4>
-          </Button>
+          <form onSubmit={handleSubmit(handleSubmitFrom)}>
+            <Field
+              name="email"
+              type="text"
+              component={renderField}
+              label="Email"
+              placeholder="Email"
+              classes={classes}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <EmailIcon className={classes.icon} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Field
+              name="username"
+              type="text"
+              component={renderField}
+              label="Username"
+              placeholder="Enter username"
+              classes={classes}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle className={classes.icon} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Field
+              name="password"
+              type="password"
+              component={renderField}
+              label="Password"
+              placeholder="Enter password"
+              classes={classes}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <VpnKeyIcon className={classes.icon} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Field
+              name="passwordConfirm"
+              type="password"
+              component={renderField}
+              label="Confirm Password"
+              placeholder="Enter confirm password"
+              classes={classes}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <VpnKeyIcon className={classes.icon} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              className={classes.btnStyle}
+            >
+              <h4 className={classes.title}>Sign up</h4>
+            </Button>
+          </form>
           <Typography className={classes.text}>
             Did you have an account?{" "}
             <Link className={classes.a} to="/login">
@@ -110,6 +149,11 @@ const Register = () => {
       </Grid>
     </Paper>
   );
-};
+}
+const FORM_NAME = "REGISTER_FORM";
+const withReduxForm = reduxForm({
+  form: FORM_NAME,
+  validate,
+});
 
-export default Register;
+export default compose(withReduxForm)(Register);

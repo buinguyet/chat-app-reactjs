@@ -4,7 +4,7 @@ import Login from "./Auth/Login/LoginContainer";
 import Register from "./Auth/Register/RegisterContainer";
 import Home from "./Home/HomeContainer";
 
-function Main() {
+function Main(props) {
   return (
     <Router>
       <Switch>
