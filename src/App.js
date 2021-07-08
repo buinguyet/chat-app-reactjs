@@ -1,5 +1,5 @@
 import React from "react";
-import Main from "./components/Main";
+import Main from "./containers/Main";
 import background from "./assets/images/background.jpg";
 function App() {
   return (
