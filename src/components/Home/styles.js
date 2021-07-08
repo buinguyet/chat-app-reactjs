@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "#7986cb",
   },
   nav: {
-    backgroundColor: "#dfe7fd",
+    backgroundColor: "#f5f7fb",
     height: "95vh",
   },
   large: {
@@ -58,6 +58,8 @@ export const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(3),
       width: "auto",
     },
+    color: "#495057",
+    fontWeight: "bolder",
   },
   search: {
     position: "relative",
@@ -99,7 +101,7 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   listChats: {
-    maxHeight: "90vh",
+    maxHeight: "92vh",
     overflow: "auto",
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -111,16 +113,27 @@ export const useStyles = makeStyles((theme) => ({
       width: "auto",
     },
   },
+
+  time: {
+    fontSize: "12px",
+    textAlign: "right",
+  },
+
+  text: {
+    color: "#495057",
+    fontWeight: "bolder",
+  },
+
   "@global": {
     "*::-webkit-scrollbar": {
-      width: "0.4em",
+      width: "0.3em",
     },
     "*::-webkit-scrollbar-track": {
-      "-webkit-box-shadow": "inset 0 0 6px #ced4da",
+      "-webkit-box-shadow": "inset 0 0 6px #edf2f4",
     },
     "*::-webkit-scrollbar-thumb": {
-      backgroundColor: "#ced4da",
-      outline: "1px solid #ced4da",
+      backgroundColor: "#edf2f4",
+      outline: "1px solid #edf2f4",
     },
   },
 }));

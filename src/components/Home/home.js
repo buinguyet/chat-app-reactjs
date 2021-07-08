@@ -13,7 +13,7 @@ import {
   InputBase,
   Divider,
 } from "@material-ui/core";
-import { useStyles, StyledBadge } from "./styles";
+import { useStyles } from "./styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { useTheme } from "@material-ui/core/styles";
 import HomeIcon from "@material-ui/icons/Home";
@@ -22,6 +22,9 @@ import MessageIcon from "@material-ui/icons/Message";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import EditIcon from "@material-ui/icons/Edit";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import PrimarySearchAppBar from "../Header/menuBar";
+import TypingMessage from "../TypeMessage/typeMessage";
+import Message from "../Message/message";
 
 const dataChats = [
   {
@@ -37,7 +40,7 @@ const dataChats = [
     name: "Nguyet 2",
     avatar:
       "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-    text: "Love you",
+    text: "Nice to meet you",
     date: "2021-07-05",
   },
   {
@@ -61,7 +64,7 @@ const dataChats = [
     name: "Nguyet 5",
     avatar:
       "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-    text: "Love you",
+    text: "Are you working or studying?",
     date: "2021-07-05",
   },
   {
@@ -101,7 +104,7 @@ const dataChats = [
     name: "Nguyet 10",
     avatar:
       "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-    text: "Love you",
+    text: "From that night, I always think about...",
     date: "2021-07-05",
   },
   {
@@ -242,7 +245,6 @@ const Home = (props) => {
             sm={3}
             md={3}
             lg={3}
-            style={{ backgroundColor: "#f7f7ff" }}
           >
             <Typography className={classes.title} variant="h6" noWrap>
               Chats
@@ -273,12 +275,14 @@ const Home = (props) => {
                         <ListItemAvatar>
                           <Avatar alt={data?.name} src={data?.avatar}></Avatar>
                         </ListItemAvatar>
-                        <ListItemText
+                        <ListItemText className={classes.text}
                           primary={data?.name}
                           secondary={data?.text}
                         />
                         <ListItemIcon>
-                          <Typography>{data?.date}</Typography>
+                          <Typography className={classes.time}>
+                            {data?.date}
+                          </Typography>
                         </ListItemIcon>
                       </ListItem>
                     </div>
@@ -288,11 +292,15 @@ const Home = (props) => {
             </Grid>
           </Grid>
           <Grid item xs={9} sm={9} md={9} lg={9}>
-            <Grid container>
+            <Grid container direction="row">
               <Grid item xs={12}>
-              <Avatar alt="Remy Sharp" src="https://static.toiimg.com/photo/msid-67586673/67586673.jpg?3918697">
-                <Typography>LENA@</Typography>
-              </Avatar>
+                <PrimarySearchAppBar />
+              </Grid>
+              <Grid item xs={12} style={{ height: "85vh" }}>
+                <Message />
+              </Grid>
+              <Grid item justify="flex-end" xs={12}>
+                <TypingMessage />
               </Grid>
             </Grid>
           </Grid>
