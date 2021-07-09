@@ -1,75 +1,76 @@
-
-import * as accountConstant from '../constants/auth';
+import * as accountConstant from "../constants/auth";
 
 const initialState = {
-    isLogOut: false,
-    infoLogin: {},
-    isForgotPassword: false,
-    infoForgotPassword: {},
-    isVerifyCode: false,
-    infoVerifyCode: {},
-    isResetPassword: false,
-    isRegister: false,
-    infoRegister: {},
-    isActiveAccount: false,
-    infoActiveAccount: {},
-    errorLogin: null,
-    errorVerify: null,
-    errorRegister: null,
-    errorActive: null,
+  isLogOut: false,
+  infoLogin: {},
+  isForgotPassword: false,
+  infoForgotPassword: {},
+  isVerifyCode: false,
+  infoVerifyCode: {},
+  isResetPassword: false,
+  isRegister: false,
+  infoRegister: {},
+  isActiveAccount: false,
+  infoActiveAccount: {},
+  errorLogin: null,
+  errorVerify: null,
+  errorRegister: null,
+  errorActive: null,
 };
 const stateDefault = {
-    isLogOut: false,
-    infoLogin: {},
-    isForgotPassword: false,
-    infoForgotPassword: {},
-    isVerifyCode: false,
-    infoVerifyCode: {},
-    isResetPassword: false,
-    isRegister: false,
-    infoRegister: {},
-    isActiveAccount: false,
-    infoActiveAccount: {},
-    errorLogin: null,
-    errorVerify: null,
-    errorRegister: null,
-    errorActive: null,
+  isLogOut: false,
+  infoLogin: {},
+  isForgotPassword: false,
+  infoForgotPassword: {},
+  isVerifyCode: false,
+  infoVerifyCode: {},
+  isResetPassword: false,
+  isRegister: false,
+  infoRegister: {},
+  isActiveAccount: false,
+  infoActiveAccount: {},
+  errorLogin: null,
+  errorVerify: null,
+  errorRegister: null,
+  errorActive: null,
 };
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
+  switch (action.type) {
     case accountConstant.FETCH_REGISTER: {
-        return {
-            ...state,
-            isLoading: true,
-            error: null,
-            status: stateDefault,
-        };
+      return {
+        ...state,
+        isRegister: true,
+        errorRegister: null,
+        status: stateDefault,
+      };
     }
     case accountConstant.FETCH_REGISTER_SUCCESS: {
-        const { data } = action.payload;
-        return {
-            ...state,
-            isLoading: false,
-            error: null,
-            status: { ...state.status, isRegister: true },
-            infoRegister: data,
-        };
+      const { data } = action.payload;
+      return {
+        ...state,
+        isRegister: false,
+        errorRegister: null,
+        status: { ...state.status, isRegister: true },
+        infoRegister: data,
+      };
     }
-    case accountConstant.FETCH_REGISTER_FAILED:
-    {
-        const { error } = action.payload;
-
-        return {
-            ...state,
-            isLoading: false,
-            error,
-            status: { ...state.status, isRegister: false },
-        };
+    case accountConstant.FETCH_REGISTER_FAILED: {
+      const { error } = action.payload;
+      let errorCatch = "";
+      if (!error) {
+        errorCatch = "Register failed";
+      }
+      return {
+        ...state,
+        isRegister: false,
+        errorRegister: error || errorCatch,
+        status: { ...state.status, isRegister: false },
+      };
     }
     default:
-        return state;
-    }
+      return state;
+  }
 };
 
 export default reducer;
