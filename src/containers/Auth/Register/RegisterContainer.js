@@ -18,13 +18,13 @@ const RegisterContainer = (props) => {
   const onClickRegister = (data) => {
     fetchRegister(data, history);
   };
-  useEffect(()=>{
-    if(!isRegister && !errorRegister && infoRegister?.success){
-      setTimeout(()=>{
+  useEffect(() => {
+    if (!isRegister && !errorRegister && infoRegister?.success) {
+      setTimeout(() => {
         history.push(PATH_ROUTE.login);
-      }, 1000)
+      }, 1000);
     }
-  }, [errorRegister, history, infoRegister, isRegister])
+  }, [errorRegister, history, infoRegister, isRegister]);
   return (
     <RegisterComponent
       history={history}

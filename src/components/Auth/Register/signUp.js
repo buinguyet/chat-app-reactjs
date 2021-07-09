@@ -15,7 +15,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import backgroundImage from "../../../assets/images/login1.jpg";
 import { useStyles } from "./styles";
 import { AccountCircle } from "@material-ui/icons";
-import { reduxForm, Field, SubmissionError } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import validate from "./validate";
 import "./styles.css";

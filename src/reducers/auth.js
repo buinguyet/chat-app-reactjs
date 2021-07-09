@@ -2,6 +2,7 @@ import * as accountConstant from "../constants/auth";
 
 const initialState = {
   isLogOut: false,
+  isLogin: false,
   infoLogin: {},
   isForgotPassword: false,
   infoForgotPassword: {},
@@ -19,6 +20,7 @@ const initialState = {
 };
 const stateDefault = {
   isLogOut: false,
+  isLogin: false,
   infoLogin: {},
   isForgotPassword: false,
   infoForgotPassword: {},
@@ -51,7 +53,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         isRegister: false,
         errorRegister: null,
-        status: { ...state.status, isRegister: true },
+        status: { ...state.status },
         infoRegister: data,
       };
     }
@@ -66,6 +68,38 @@ const reducer = (state = initialState, action) => {
         isRegister: false,
         errorRegister: error || errorCatch,
         status: { ...state.status, isRegister: false },
+      };
+    }
+
+    case accountConstant.FETCH_LOGIN: {
+      return {
+        ...state,
+        isLogin: true,
+        errorLogin: null,
+        status: stateDefault,
+      };
+    }
+    case accountConstant.FETCH_LOGIN_SUCCESS: {
+      const { data } = action.payload;
+      return {
+        ...state,
+        isLogin: false,
+        errorLogin: null,
+        status: { ...state.status },
+        infoLogin: data,
+      };
+    }
+    case accountConstant.FETCH_LOGIN_FAILED: {
+      const { error } = action.payload;
+      let errorCatch = "";
+      if (!error) {
+        errorCatch = "Login failed";
+      }
+      return {
+        ...state,
+        isLogin: false,
+        errorLogin: error || errorCatch,
+        status: { ...state.status },
       };
     }
     default:
