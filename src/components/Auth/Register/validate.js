@@ -2,7 +2,7 @@ import { isEmail, isName, isPassword } from "../../../common/shared";
 
 const validate = (values) => {
   const errors = {};
-  const { email, username, password, confirmPassword } = values;
+  const { email, username, password, passwordConfirm } = values;
   if (!email) {
     errors.email = "Please enter email!";
   } else if (!isEmail(email)) {
@@ -20,14 +20,14 @@ const validate = (values) => {
     errors.password =
       "Password must contain at least 8 characters, include text, number and special character!";
   }
-  if (!confirmPassword) {
-    errors.confirmPassword = "Please enter confirmPassword!";
-  } else if (!isPassword(confirmPassword)) {
-    errors.confirmPassword =
+  if (!passwordConfirm) {
+    errors.passwordConfirm = "Please enter passwordConfirm!";
+  } else if (!isPassword(passwordConfirm)) {
+    errors.passwordConfirm =
       "Password must contain at least 8 characters, include text, number and special character!";
   }
-  if (confirmPassword !== password) {
-    errors.confirmPassword = "Confirm password must match with password!";
+  if (passwordConfirm !== password) {
+    errors.passwordConfirm = "Confirm password must match with password!";
   }
   return errors;
 };

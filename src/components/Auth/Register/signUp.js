@@ -18,6 +18,7 @@ import { AccountCircle } from "@material-ui/icons";
 import { reduxForm, Field, SubmissionError } from "redux-form";
 import { compose } from "redux";
 import validate from "./validate";
+import "./styles.css";
 
 const renderField = ({
   input,
@@ -42,16 +43,20 @@ const renderField = ({
         InputProps={InputProps}
       />
       {touched && error && (
-        <span style={{ color: "#7986cb", fontSize: "11px" }}>
-          {error}
-        </span>
+        <span style={{ color: "#7986cb", fontSize: "11px" }}>{error}</span>
       )}
     </>
   );
 };
 
 function Register(props) {
-  const { handleSubmit, onClickRegister } = props;
+  const {
+    handleSubmit,
+    onClickRegister,
+    errorRegister,
+    infoRegister,
+    isRegister,
+  } = props;
   const handleSubmitFrom = (data) => {
     if (onClickRegister) onClickRegister(data);
   };
@@ -64,11 +69,35 @@ function Register(props) {
             <LockOutlinedIcon />
           </Avatar>
           <h2>Welcome to Funny Chat!</h2>
+          {isRegister && (
+            <div className="lds-default">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          )}
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
           <img src={backgroundImage} alt="img" width="100%" height="100%" />
         </Grid>
         <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+          {errorRegister ? (
+            <span className={classes.error}>{errorRegister}</span>
+          ) : infoRegister?.message ? (
+            <span className={classes.success}>{infoRegister?.message}</span>
+          ) : (
+            ""
+          )}
+
           <h3>Sign up</h3>
           <form onSubmit={handleSubmit(handleSubmitFrom)}>
             <Field

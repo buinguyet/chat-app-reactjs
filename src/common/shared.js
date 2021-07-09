@@ -27,7 +27,6 @@ export const clearToken = () => {
 
 export const axiosBodyToAPI = async (method, uri, body, json = true) => {
     try {
-        console.log("uri: ", uri)
         const xAccessToken = getToken() ? getToken() : '';
         const headerConfig = {
             headers: {

@@ -8,28 +8,21 @@ import {
 } from "../actions/auth";
 import { fetchRegisterApi } from "../apis/auth";
 import { STATUS_CODE } from "../constants/index";
-import alertify from "alertifyjs";
-import "../../node_modules/alertifyjs/build/css/alertify.css";
-import "../../node_modules/alertifyjs/build/css/themes/semantic.css";
+import {PATH_ROUTE} from '../constants/pathRoutes'
 
 function* actionFetchRegister(action) {
   try {
     yield delay(500);
-    const { params } = action.payload;
+    const { params, history } = action.payload;
     const response = yield call(fetchRegisterApi, params);
     const { status, data } = response;
-    console.log("response: ", response)
     if (status === STATUS_CODE.SUCCESS && data.success === true) {
-      yield put(fetchRegisterSuccess(data.data));
-      console.log("register success");
+      yield put(fetchRegisterSuccess(data));
     } else {
-      yield put(fetchRegisterFailed(params));
-      alertify.error(response.data.error);
-      console.log("register failed");
+      yield put(fetchRegisterFailed(data.message));
     }
   } catch (error) {
     yield put(fetchRegisterFailed(error));
-    alertify.error(error.response.data.error);
     console.log("register failed with catch");
   }
 }
