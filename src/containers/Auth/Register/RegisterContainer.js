@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as registerActions from "../../../actions/auth";
 import { PATH_ROUTE } from "../../../constants/pathRoutes";
+import {getToken} from '../../../common/shared';
 
 const RegisterContainer = (props) => {
   const {
@@ -25,6 +26,13 @@ const RegisterContainer = (props) => {
       }, 1000);
     }
   }, [errorRegister, history, infoRegister, isRegister]);
+
+  useEffect(() => {
+    const isToken = getToken();
+    if (isToken) {
+        history.replace(PATH_ROUTE.default);
+    }
+},[history]);
   return (
     <RegisterComponent
       history={history}

@@ -24,7 +24,7 @@ const HomeContainer = (props) => {
               <Grid item xs={12} style={{ height: "85vh" }}>
                 <MessageContainer />
               </Grid>
-              <Grid item justify="flex-end" xs={12}>
+              <Grid item xs={12}>
                 <TypeMessageContainer />
               </Grid>
             </Grid>

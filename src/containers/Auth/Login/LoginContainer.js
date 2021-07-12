@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as loginActions from "../../../actions/auth";
 import { PATH_ROUTE } from "../../../constants/pathRoutes";
-import {setToken, getToken, isEmpty} from '../../../common/shared';
+import { setToken, getToken, isEmpty } from "../../../common/shared";
 
 const LoginContainer = (props) => {
   const { history, loginActionCreators, infoLogin, errorLogin, isLogin } =
@@ -15,21 +15,19 @@ const LoginContainer = (props) => {
   const onClickLogin = (data) => {
     fetchLogin(data, history);
   };
-  // useEffect(() => {
-  //   if (!isLogin && !errorLogin && !isEmpty(infoLogin)) {
-  //     // set token
-  //     setToken(infoLogin.token);
-  //     setTimeout(() => {
-  //       history.push(PATH_ROUTE.default);
-  //     }, 1000);
-  //   }
-  // }, [errorLogin, history, infoLogin, isLogin]);
+  useEffect(() => {
+    if (!isLogin && !errorLogin && !isEmpty(infoLogin)) {
+      // set token
+      setToken(infoLogin.token);
+      history.push(PATH_ROUTE.default);
+    }
+  }, [errorLogin, history, infoLogin, isLogin]);
   useEffect(() => {
     const isToken = getToken();
     if (isToken) {
-        history.replace(PATH_ROUTE.default);
+      history.replace(PATH_ROUTE.default);
     }
-},[]);
+  }, []);
   return (
     <LoginComponent
       history={history}

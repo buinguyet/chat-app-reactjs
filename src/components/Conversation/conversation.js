@@ -43,7 +43,7 @@ const Conversation = (props) => {
         <Grid item xs={12}>
           <List className={classes.listChats}>
             {dataChats?.map((data) => (
-              <div>
+              <div key={data?.id}>
                 <ListItem button>
                   <ListItemAvatar>
                     <Avatar alt={data?.name} src={data?.avatar}></Avatar>
