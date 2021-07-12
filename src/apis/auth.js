@@ -11,3 +11,8 @@ export const fetchRegisterApi = (params = {}) => {
     const body = params;
     return axiosBodyToAPI('POST', API_REGISTER, body);
 };
+
+export const fetchLoginApi = (params = {}) => {
+    const body = params;
+    return axiosBodyToAPI('POST', API_LOGIN, body);
+};

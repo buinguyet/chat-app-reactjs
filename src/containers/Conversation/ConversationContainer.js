@@ -92,7 +92,7 @@ const ConversationContainer = (props) => {
           date: "2021-07-05",
         },
         {
-          id: 11,
+          id: 12,
           name: "Nguyet 11",
           avatar:
             "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
@@ -100,7 +100,7 @@ const ConversationContainer = (props) => {
           date: "2021-07-05",
         },
         {
-          id: 11,
+          id: 13,
           name: "Nguyet 11",
           avatar:
             "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
@@ -108,7 +108,7 @@ const ConversationContainer = (props) => {
           date: "2021-07-05",
         },
         {
-          id: 11,
+          id: 14,
           name: "Nguyet 11",
           avatar:
             "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
@@ -116,7 +116,7 @@ const ConversationContainer = (props) => {
           date: "2021-07-05",
         },
         {
-          id: 11,
+          id: 15,
           name: "Nguyet 11",
           avatar:
             "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",

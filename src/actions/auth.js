@@ -22,3 +22,25 @@ export const fetchRegisterFailed = (error) => ({
         error,
     },
 });
+
+export const fetchLogin = (params = {}, history) => ({
+    type: authConstant.FETCH_LOGIN,
+    payload: {
+        params,
+    },
+    history,
+});
+
+export const fetchLoginSuccess = (data) => ({
+    type: authConstant.FETCH_LOGIN_SUCCESS,
+    payload: {
+        data,
+    },
+});
+
+export const fetchLoginFailed = (error) => ({
+    type: authConstant.FETCH_LOGIN_FAILED,
+    payload: {
+        error,
+    },
+});

@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+const empty= require('is-empty');
 
 export const getToken = () => {
     try {
@@ -81,3 +82,5 @@ export const isPassword= (value)=>{
     const filter = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/;
     return !!filter.test(value); 
 } 
+
+export const isEmpty= (value)=> empty(value);

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as registerActions from "../../../actions/auth";
 import { PATH_ROUTE } from "../../../constants/pathRoutes";
+import {getToken} from '../../../common/shared';
 
 const RegisterContainer = (props) => {
   const {
@@ -18,13 +19,20 @@ const RegisterContainer = (props) => {
   const onClickRegister = (data) => {
     fetchRegister(data, history);
   };
-  useEffect(()=>{
-    if(!isRegister && !errorRegister && infoRegister?.success){
-      setTimeout(()=>{
+  useEffect(() => {
+    if (!isRegister && !errorRegister && infoRegister?.success) {
+      setTimeout(() => {
         history.push(PATH_ROUTE.login);
-      }, 1000)
+      }, 1000);
     }
-  }, [errorRegister, history, infoRegister, isRegister])
+  }, [errorRegister, history, infoRegister, isRegister]);
+
+  useEffect(() => {
+    const isToken = getToken();
+    if (isToken) {
+        history.replace(PATH_ROUTE.default);
+    }
+},[history]);
   return (
     <RegisterComponent
       history={history}
