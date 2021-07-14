@@ -1,5 +1,5 @@
 import React from "react";
-import { useStyles } from "./styles";
+import { StyledBadge, useStyles } from "./styles";
 import {
   Avatar,
   Grid,
@@ -18,7 +18,14 @@ const Conversation = (props) => {
   const dataChats = props.dataChats;
   const classes = useStyles();
   return (
-    <Grid item xs={3} sm={3} md={3} lg={3}>
+    <Grid
+      item
+      xs={3}
+      sm={3}
+      md={3}
+      lg={3}
+      style={{ backgroundColor: "#f5f7fb" }}
+    >
       <Typography className={classes.title} variant="h6" noWrap>
         Chats
       </Typography>
@@ -30,7 +37,7 @@ const Conversation = (props) => {
             </div>
             <InputBase
               fullWidth
-              placeholder="Search…"
+              placeholder="Search messages or users"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -46,12 +53,28 @@ const Conversation = (props) => {
               <div key={data?.id}>
                 <ListItem button>
                   <ListItemAvatar>
-                    <Avatar alt={data?.name} src={data?.avatar}></Avatar>
+                    <StyledBadge
+                      overlap="circle"
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right",
+                      }}
+                      variant="dot"
+                    >
+                      <Avatar alt={data?.name} src={data?.avatar}></Avatar>
+                    </StyledBadge>
                   </ListItemAvatar>
                   <ListItemText
-                    className={classes.text}
-                    primary={data?.name}
-                    secondary={data?.text}
+                    primary={
+                      <Typography className={classes.name}>
+                        {data?.name}
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography className={classes.text}>
+                        {data?.text}
+                      </Typography>
+                    }
                   />
                   <ListItemIcon>
                     <Typography className={classes.time}>

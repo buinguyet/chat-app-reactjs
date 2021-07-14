@@ -12,6 +12,8 @@ import {
   ListItemIcon,
   Hidden,
   Drawer,
+  Avatar,
+  IconButton,
 } from "@material-ui/core";
 
 const Navigation = (props) => {
@@ -25,47 +27,61 @@ const Navigation = (props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const drawer = (
-    <div>
+    <div className={classes.drawerBar}>
       <div className={classes.toolbar} />
-      <List>
-        <br></br>
-        <br></br>
-        <ListItem className={classes.listItem} button>
-          <ListItemIcon>
-            <HomeIcon />
+      <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+        <ListItem style={{display: 'flex', flex: 1, justifyContent: 'flex-start'}}  button>
+          <ListItemIcon className={classes.itemStyle}>
+            <Avatar size="small" alt="taylor" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj8XD9LvUEuJIv0QyB0sJco5j7Pybnmo9XYA&usqp=CAU" />
           </ListItemIcon>
         </ListItem>
-        <br></br>
-        <br></br>
-        <ListItem className={classes.listItem} button>
-          <ListItemIcon>
-            <PersonIcon />
-          </ListItemIcon>
-        </ListItem>
-        <br></br>
-        <br></br>
-        <ListItem className={classes.listItem} button>
-          <ListItemIcon>
-            <MessageIcon />
-          </ListItemIcon>
-        </ListItem>
-        <br></br>
-        <br></br>
-        <ListItem className={classes.listItem} button>
-          <ListItemIcon>
-            <GroupAddIcon />
-          </ListItemIcon>
-        </ListItem>
-        <br></br>
-        <br></br>
-        <ListItem className={classes.listItem} button>
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-        </ListItem>
-        <br></br>
-        <br></br>
-      </List>
+        <div style={{display: 'flex', flex: 9, flexDirection: 'column', justifyContent: 'space-between'}}>
+          <List style={{display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'center'}}>
+            <ListItem className={classes.listItem} button>
+              <ListItemIcon className={classes.itemStyle}>
+                <HomeIcon />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem className={classes.listItem} button>
+              <ListItemIcon className={classes.itemStyle}>
+                <PersonIcon />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem className={classes.listItem} button>
+              <ListItemIcon className={classes.itemStyle}>
+                <MessageIcon />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem className={classes.listItem} button>
+              <ListItemIcon className={classes.itemStyle}>
+                <GroupAddIcon />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem className={classes.listItem} button>
+              <ListItemIcon className={classes.itemStyle}>
+                <EditIcon />
+              </ListItemIcon>
+            </ListItem>
+          </List>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <ListItem   button>
+              <ListItemIcon className={classes.itemStyle}>
+                <Avatar size="small" alt="taylor" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj8XD9LvUEuJIv0QyB0sJco5j7Pybnmo9XYA&usqp=CAU" />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem className={classes.listItem} button>
+              <ListItemIcon className={classes.itemStyle}>
+                <EditIcon />
+              </ListItemIcon>
+            </ListItem>
+            <ListItem className={classes.listItem} button>
+              <ListItemIcon className={classes.itemStyle}>
+                <EditIcon />
+              </ListItemIcon>
+            </ListItem>
+          </div>
+        </div>
+      </div>
     </div>
   );
   return (
@@ -83,13 +99,13 @@ const Navigation = (props) => {
           }}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
-          }}
+          }} 
         >
           {drawer}
         </Drawer>
       </Hidden>
       <Hidden xsDown implementation="css">
-        <Drawer
+        <Drawer className={classes.flex}
           classes={{
             paper: classes.drawerPaper,
           }}
