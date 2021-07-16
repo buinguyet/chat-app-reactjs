@@ -12,7 +12,11 @@ const useStyles = makeStyles((theme) => ({
 
   icons: {
     color:'#7269ef',
-    width: '1vw'
+    width: '15px'
+  },
+  images: {
+    width: "200px",
+    height: "200px"
   },
 }));
 

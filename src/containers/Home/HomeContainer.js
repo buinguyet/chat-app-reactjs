@@ -11,7 +11,7 @@ const HomeContainer = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <NavigationContainer />
+      <NavigationContainer history={props.history} />
       <CssBaseline />
       <main className={classes.content}>
         <Grid container>

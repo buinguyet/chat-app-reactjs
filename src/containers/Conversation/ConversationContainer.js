@@ -1,130 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ConversationComponent from "../../components/Conversation/conversation";
+import { bindActionCreators, compose } from "redux";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import * as contactActions from "../../actions/contact";
+import * as messageActions from "../../actions/message";
+import { getToken, isEmpty, lastItemOfArray } from "../../common/shared";
+import { CONVERSATION_TYPES } from "../../constants";
 
 const ConversationContainer = (props) => {
-    const dataChats = [
-        {
-          id: 1,
-          name: "Nguyet 1",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 2,
-          name: "Nguyet 2",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Nice to meet you",
-          date: "2021-07-05",
-        },
-        {
-          id: 3,
-          name: "Nguyet 3",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 4,
-          name: "Nguyet 4",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 5,
-          name: "Nguyet 5",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Are you working or studying?",
-          date: "2021-07-05",
-        },
-        {
-          id: 6,
-          name: "Nguyet 6",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 7,
-          name: "Nguyet 7",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 8,
-          name: "Nguyet 8",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 9,
-          name: "Nguyet 9",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 10,
-          name: "Nguyet 10",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "From that night, I always think about...",
-          date: "2021-07-05",
-        },
-        {
-          id: 11,
-          name: "Nguyet 11",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 12,
-          name: "Nguyet 11",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 13,
-          name: "Nguyet 11",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 14,
-          name: "Nguyet 11",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-        {
-          id: 15,
-          name: "Nguyet 11",
-          avatar:
-            "https://vcdn-giaitri.vnecdn.net/2021/03/25/taylor-swift-folklore-album-re-9066-6526-1616664410.jpg",
-          text: "Love you",
-          date: "2021-07-05",
-        },
-      ];
-  return <ConversationComponent dataChats= {dataChats} />;
+  const {
+    contactsActionsCreators,
+    listFriend,
+    messageActionCreators,
+    listConversation,
+  } = props;
+  const { fetchListFriend } = contactsActionsCreators;
+  const { fetchListConversation, fetchListMessage } = messageActionCreators;
+  const [background, setBackground] = useState("");
+  useEffect(() => {
+    const userId = getToken("userId");
+    fetchListFriend({ userId });
+    fetchListConversation({ userId });
+  }, [fetchListConversation, fetchListFriend]);
+
+  let newRsData = [];
+  if (!isEmpty(listConversation?.data)) {
+    newRsData = listConversation?.data?.map((conversation) => {
+      const newCon = {};
+      const lastMessage = lastItemOfArray(conversation.data);
+      newCon.message = lastMessage;
+      newCon.contact = conversation.contact;
+      return newCon;
+    });
+  }
+
+  const handleClickConversation = (data) => {
+    setBackground(data?.contact?._id);
+    const dataForSend= {
+      senderId: getToken("userId"),
+      receiverId: data?.contact?._id,
+      skip: 0,
+      isChatGroup: data?.message?.conversationType=== CONVERSATION_TYPES[1] ? true : false,
+    };
+    fetchListMessage(dataForSend);
+  };
+
+  return (
+    <ConversationComponent
+      dataChats={newRsData}
+      background={background}
+      handleClickConversation={handleClickConversation}
+    />
+  );
 };
 
-export default ConversationContainer;
+const mapStateToProps = (state) => ({
+  listFriend: state.contact.listFriend,
+  isListFriend: state.contact.isListFriend,
+  listConversation: state.message.listConversation,
+  isListConversation: state.message.isListConversation,
+});
+const mapDispatchToProps = (dispatch) => ({
+  contactsActionsCreators: bindActionCreators(contactActions, dispatch),
+  messageActionCreators: bindActionCreators(messageActions, dispatch),
+});
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+export default compose(withRouter, withConnect)(ConversationContainer);

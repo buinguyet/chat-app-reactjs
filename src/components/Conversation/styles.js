@@ -7,10 +7,6 @@ export const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "#7986cb",
   },
-  nav: {
-    backgroundColor: "#f5f7fb",
-    height: "95vh",
-  },
   large: {
     width: theme.spacing(7),
     height: theme.spacing(7),
@@ -37,7 +33,6 @@ export const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  // necessary for content to be below app bar
   listItem: {
     paddingLeft: "29%",
   },
@@ -47,34 +42,31 @@ export const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     maxHeight: "100%",
-    // padding: theme.spacing(3),
   },
   title: {
     position: "relative",
     marginRight: theme.spacing(2),
-    marginLeft: 0,
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(2),
+    scrollSnapMarginTop: theme.spacing(2),
+    marginLeft: theme.spacing(5),
     width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
     color: "#495057",
     fontWeight: "bolder",
+  },
+  name: {
+    fontSize: '15px!important',
+    color: "#495057",
+    fontFamily: `"Public Sans",sans-serif`,
+    fontWeight: 600,
   },
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
+    marginLeft: theme.spacing(5),
+    marginRight: theme.spacing(5),
+    height: "5vh",
     backgroundColor: "#e6ebf5!important",
-    // '&:hover': {
-    //   backgroundColor: "#adb5bd",
-    // },
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -87,21 +79,25 @@ export const useStyles = makeStyles((theme) => ({
     color: "#adb5bd",
   },
   inputRoot: {
-    color: "inherit",
+    fontSize: '.875rem',
+    fontWeight: 400,
+    lineHeight: 1.5,
+    color: '#495057',
+    backgroundClip: 'padding-box',
+    border: '1px solid #e6ebf5',
+    appearance: 'none',
+    borderRadius: '.25rem',
+    transition: 'border-color .15s ease-in-out,box-shadow .15s ease-in-out',
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
+    padding: theme.spacing(1.5, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
   },
 
   listChats: {
-    maxHeight: "92vh",
+    maxHeight: "87vh",
     overflow: "auto",
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -120,8 +116,10 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   text: {
-    color: "#495057",
-    fontWeight: "bolder",
+    color: "#7a7f9a",
+    fontSize: "14px",
+    textOverflow: 'ellipsis',
+    fontFamily: `"Public Sans",sans-serif`
   },
 
   "@global": {

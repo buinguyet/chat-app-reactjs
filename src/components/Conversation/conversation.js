@@ -1,5 +1,5 @@
 import React from "react";
-import { useStyles } from "./styles";
+import { StyledBadge, useStyles } from "./styles";
 import {
   Avatar,
   Grid,
@@ -13,12 +13,20 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import { convertTimestampToHumanTime, cutString } from "../../common/shared";
 
 const Conversation = (props) => {
-  const dataChats = props.dataChats;
+  const { dataChats, background, handleClickConversation } = props;
   const classes = useStyles();
   return (
-    <Grid item xs={3} sm={3} md={3} lg={3}>
+    <Grid
+      item
+      xs={3}
+      sm={3}
+      md={3}
+      lg={3}
+      style={{ backgroundColor: "#f5f7fb" }}
+    >
       <Typography className={classes.title} variant="h6" noWrap>
         Chats
       </Typography>
@@ -30,7 +38,7 @@ const Conversation = (props) => {
             </div>
             <InputBase
               fullWidth
-              placeholder="Search…"
+              placeholder="Search messages or users"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -42,20 +50,54 @@ const Conversation = (props) => {
         <Divider />
         <Grid item xs={12}>
           <List className={classes.listChats}>
-            {dataChats?.map((data) => (
-              <div key={data?.id}>
-                <ListItem button>
+            {dataChats?.map((data, index) => (
+              <div key={data?.contact?._id}>
+                <ListItem
+                  button
+                  style={{backgroundColor: (background=== data?.contact?._id ? "#ced4da" :
+                  (index===0 && background==="" ? "#ced4da" :"")) }}
+                  onClick={() => handleClickConversation(data)}
+                >
                   <ListItemAvatar>
-                    <Avatar alt={data?.name} src={data?.avatar}></Avatar>
+                    <StyledBadge
+                      overlap="circle"
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right",
+                      }}
+                      variant="dot"
+                    >
+                      <Avatar
+                        alt={data?.name}
+                        src={`http://localhost:2017/public/${data?.contact?.avatar}`}
+                      ></Avatar>
+                    </StyledBadge>
                   </ListItemAvatar>
                   <ListItemText
-                    className={classes.text}
-                    primary={data?.name}
-                    secondary={data?.text}
+                    primary={
+                      <Typography className={classes.name}>
+                        {data?.contact?.username || data?.contact?.name}
+                      </Typography>
+                    }
+                    secondary={
+                      <Typography className={classes.text}>
+                        {data?.message?.messageType === "text"
+                          ? data?.message.text
+                            ? cutString(data?.message.text)
+                            : ""
+                          : data?.message?.messageType === "file"
+                          ? "File"
+                          : "Image"}
+                      </Typography>
+                    }
                   />
                   <ListItemIcon>
                     <Typography className={classes.time}>
-                      {data?.date}
+                      {data?.message?.updatedAt
+                        ? convertTimestampToHumanTime(data?.message?.updatedAt)
+                        : data?.message?.createdAt
+                        ? convertTimestampToHumanTime(data?.message?.createdAt)
+                        : ""}
                     </Typography>
                   </ListItemIcon>
                 </ListItem>

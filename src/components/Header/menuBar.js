@@ -18,7 +18,8 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import useStyles from "./styles";
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(props) {
+  const {contactInfo,}= props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -112,7 +113,7 @@ export default function PrimarySearchAppBar() {
         <Toolbar>
           <Avatar
             alt="Remy Sharp"
-            src="https://ichef.bbci.co.uk/news/976/cpsprodpb/A7E9/production/_118158924_gettyimages-507245091.jpg"
+            src={`http://localhost:2017/public/${contactInfo?.avatar}`}
           ></Avatar>
           <IconButton
             edge="start"
@@ -120,7 +121,7 @@ export default function PrimarySearchAppBar() {
             color="inherit"
             aria-label="open drawer"
           >
-            <Typography className={classes.title}>LENA@</Typography>
+            <Typography className={classes.title}>{contactInfo?.username || contactInfo?.name}</Typography>
           </IconButton>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
