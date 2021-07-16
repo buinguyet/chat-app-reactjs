@@ -6,7 +6,7 @@ import Register from "./Auth/Register/RegisterContainer";
 import Home from "./Home/HomeContainer";
 
 function Main(props) {
-  const token = getToken();
+  const token = getToken("TOKEN");
   return token ? (
     <Route path={props.path}>
       <props.component />

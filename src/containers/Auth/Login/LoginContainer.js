@@ -18,12 +18,12 @@ const LoginContainer = (props) => {
   useEffect(() => {
     if (!isLogin && !errorLogin && !isEmpty(infoLogin)) {
       // set token
-      setToken(infoLogin.token);
-      history.push(PATH_ROUTE.default);
+      setToken("TOKEN", infoLogin.token);
+      setToken("userId", infoLogin._id);
     }
   }, [errorLogin, history, infoLogin, isLogin]);
   useEffect(() => {
-    const isToken = getToken();
+    const isToken = getToken("TOKEN");
     if (isToken) {
       history.replace(PATH_ROUTE.default);
     }

@@ -26,12 +26,12 @@
 }
 
 .chat-time .me {
-  font-size: 12px;
   margin-top: 4px;
   text-align: right;
   color: hsla(0, 0%, 100%, 0.5);
 }
 .mb-0 {
+  font-size: 11px;
   margin-bottom: 0 !important;
 }
 .align-middle {

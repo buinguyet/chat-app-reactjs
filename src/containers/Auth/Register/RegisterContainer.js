@@ -28,7 +28,7 @@ const RegisterContainer = (props) => {
   }, [errorRegister, history, infoRegister, isRegister]);
 
   useEffect(() => {
-    const isToken = getToken();
+    const isToken = getToken("TOKEN");
     if (isToken) {
         history.replace(PATH_ROUTE.default);
     }

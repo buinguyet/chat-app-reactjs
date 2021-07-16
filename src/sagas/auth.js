@@ -35,7 +35,8 @@ function* actionFetchLogin(action) {
     const response = yield call(fetchLoginApi, params);
     const { status, data } = response;
     if (status === STATUS_CODE.SUCCESS && data.success === true) {
-      yield setToken(data.data.token);
+      yield setToken("TOKEN", data.data.token);
+      setToken("userId", data.data._id);
       yield put(fetchLoginSuccess(data.data));
        history.push(PATH_ROUTE.default);
     } else {

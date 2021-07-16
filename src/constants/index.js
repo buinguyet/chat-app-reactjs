@@ -35,3 +35,6 @@ export const ADMIN_ROUTES = [
     component: HomeContainer,
   },
 ];
+
+export const CONVERSATION_TYPES= ["personal", "group"];
+export const MESSAGE_TYPES= ['text', 'image', 'file'];

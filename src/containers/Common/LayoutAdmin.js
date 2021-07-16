@@ -9,7 +9,7 @@ function AdminLayoutRoute(props) {
     <Route
       {...remainProps}
       render={(routeProps) =>
-        getToken() ? (
+        getToken("TOKEN") ? (
           <div {...remainProps}>
             <ChildrenAdminComponent {...routeProps} />
           </div>
